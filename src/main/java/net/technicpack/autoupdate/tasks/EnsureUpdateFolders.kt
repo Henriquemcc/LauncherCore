@@ -230,7 +230,7 @@ class EnsureUpdateFolders constructor(
     }
 
     public override fun getTaskProgress(): Float {
-        return 0
+        return 0.0F
     }
 
     @Throws(IOException::class, InterruptedException::class)
