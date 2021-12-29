@@ -232,7 +232,7 @@ class UserModel<UserType : IUserType?> constructor(
 
     init {
         mCurrentUser = null
-        mUserStore = userStore
+        mUserStore = userStore as IUserStore<UserType>
         this.gameAuthService = gameAuthService
     }
 
