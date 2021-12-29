@@ -261,7 +261,7 @@ class UserModel<UserType : IUserType?> constructor(
     @Throws(AuthenticationNetworkFailureException::class)
     fun attemptUserRefresh(user: UserType): AuthError? {
         var user: UserType? = user
-        val response: IAuthResponse? = gameAuthService.requestRefresh(user)
+        val response: IAuthResponse? = user?.let { gameAuthService.requestRefresh(it) }
         if (response == null) {
             mUserStore.removeUser(user!!.getUsername())
             return AuthError("Session Error", "Please log in again.")
