@@ -218,6 +218,13 @@ class LaunchMoverMode constructor(
 
     @Throws(IOException::class, InterruptedException::class)
     public override fun runTask(queue: InstallTasksQueue<*>?) {
-        relauncher.launch(tempLauncher.getAbsolutePath(), relauncher.buildMoverArgs())
+        val args = relauncher.buildMoverArgs()
+        val argsConverted = Array<String?>(args.size) {
+            ""
+        }
+        args.forEachIndexed { index, arg ->
+            argsConverted[index] = arg
+        }
+        relauncher.launch(tempLauncher.absolutePath, argsConverted)
     }
 }
