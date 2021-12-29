@@ -358,7 +358,7 @@ class Download constructor(private val url: URL, private val name: String?, priv
         }
     }
 
-    private inner class MonitorThread constructor(downloadThread: Thread, rbc: ReadableByteChannel?) :
+    inner class MonitorThread constructor(downloadThread: Thread, rbc: ReadableByteChannel?) :
         Thread("Download Monitor Thread") {
         private val rbc: ReadableByteChannel?
         private val downloadThread: Thread
