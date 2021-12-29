@@ -368,7 +368,11 @@ abstract class Relauncher constructor(
     fun buildLauncherArgs(isLegacy: Boolean): Array<String> {
         val outArgs: MutableList<String> = ArrayList()
         if (!isLegacy) outArgs.add("-launcheronly") else outArgs.add("-launcher")
-        outArgs.addAll(Arrays.asList(*getLaunchArgs()))
+        getLaunchArgs().forEach { launchArg ->
+            if (launchArg != null) {
+                outArgs.add(launchArg)
+            }
+        }
         outArgs.remove("-moveronly")
         return outArgs.toTypedArray()
     }
