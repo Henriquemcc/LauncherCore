@@ -237,7 +237,13 @@ class LaunchLauncherMode constructor(
 
     @Throws(IOException::class, InterruptedException::class)
     public override fun runTask(queue: InstallTasksQueue<*>?) {
-        val args: Array<String?>? = relauncher.buildLauncherArgs(isLegacy)
-        relauncher.launch(launchTarget, args)
+        val args = relauncher.buildLauncherArgs(isLegacy)
+        val argsConverted = Array<String?>(args.size){
+            ""
+        }
+        args.forEachIndexed { index, arg ->
+            argsConverted[index] = arg
+        }
+        relauncher.launch(launchTarget, argsConverted)
     }
 }
