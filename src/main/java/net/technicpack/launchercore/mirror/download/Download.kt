@@ -341,7 +341,7 @@ class Download constructor(private val url: URL, private val name: String?, priv
         return outFile
     }
 
-    private class StreamThread constructor(
+    class StreamThread constructor(
         private val urlconnection: URLConnection?,
         private val `is`: AtomicReference<InputStream?>
     ) : Thread() {
