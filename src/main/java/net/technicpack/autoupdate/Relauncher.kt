@@ -357,7 +357,11 @@ abstract class Relauncher constructor(
         outArgs.add("-movetarget")
         outArgs.add(getRunningPath())
         outArgs.add("-moveronly")
-        outArgs.addAll(Arrays.asList(*getLaunchArgs()))
+        getLaunchArgs().forEach { launchArg ->
+            if (launchArg != null) {
+                outArgs.add(launchArg)
+            }
+        }
         return outArgs.toTypedArray()
     }
 
