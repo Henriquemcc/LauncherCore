@@ -236,7 +236,7 @@ class UserModel<UserType : IUserType?> constructor(
         this.gameAuthService = gameAuthService
     }
 
-    fun getCurrentUser(): UserType {
+    fun getCurrentUser(): UserType? {
         return mCurrentUser
     }
 
