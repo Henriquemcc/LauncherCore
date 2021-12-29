@@ -236,12 +236,14 @@ class CacheDiscordApi(private val innerApi: IDiscordApi, cacheLength: Int, deadC
         //before the first one comes back.  The response will sort out the "correct" value for the
         //dead cache.
         deadCache.put(serverId, true)
-        innerApi.retrieveServer(modpack, serverId) { pack, server ->
-            if (server == null) deadCache.put(serverId, true) else {
-                deadCache.put(serverId, false)
-                cache.put(serverId, server)
+        innerApi.retrieveServer(modpack, serverId, object : IDiscordCallback {
+            override fun serverGetCallback(pack: ModpackModel?, server: Server?) {
+                if (server == null) deadCache.put(serverId, true) else {
+                    deadCache.put(serverId, false)
+                    cache.put(serverId, server)
+                }
+                callback.serverGetCallback(pack, server)
             }
-            callback.serverGetCallback(pack, server)
-        }
+        })
     }
 }
