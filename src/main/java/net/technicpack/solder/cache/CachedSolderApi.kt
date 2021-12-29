@@ -232,7 +232,7 @@ class CachedSolderApi(
     private var cachedPublicPacks: Collection<SolderPackInfo?>? = null
     private var lastSolderPull = DateTime(0)
 
-    private inner class CacheTuple(private val root: String?, private val slug: String?, private val url: String?) {
+    inner class CacheTuple(private val root: String?, private val slug: String?, private val url: String?) {
         override fun equals(obj: Any?): Boolean {
             if (obj == null) return false
             if (obj !is CacheTuple) return false
