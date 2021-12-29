@@ -251,7 +251,7 @@ class UserModel<UserType : IUserType?> constructor(
     }
 
     protected fun triggerAuthListeners() {
-        for (listener: IAuthListener<UserType> in mAuthListeners) {
+        for (listener: IAuthListener<UserType> in mAuthListeners.filterIsInstance<IAuthListener<UserType>>()) {
             listener.userChanged(mCurrentUser)
         }
     }
