@@ -324,7 +324,11 @@ abstract class Relauncher constructor(
             commands.add(launchPath)
             commands.add(getMainClass().getName())
         } else commands.add(launchPath)
-        commands.addAll(Arrays.asList(*args))
+
+        args?.forEach { arg: String? ->
+            commands.add(arg)
+        }
+
         var command: String = ""
         for (token: String? in commands) {
             command += token + " "
