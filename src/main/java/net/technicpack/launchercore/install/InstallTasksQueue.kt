@@ -221,10 +221,8 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-class InstallTasksQueue<Metadata> constructor(
-    private val listener: DownloadListener?,
-    private val mirrorStore: MirrorStore
-) : ITasksQueue {
+class InstallTasksQueue<Metadata>(private val listener: DownloadListener?, private val mirrorStore: MirrorStore) : ITasksQueue {
+
     private val tasks: LinkedList<IInstallTask>
     private var currentTask: IInstallTask?
     private var metadata: Metadata? = null
@@ -243,7 +241,7 @@ class InstallTasksQueue<Metadata> constructor(
         while (!tasks.isEmpty()) {
             currentTask = tasks.removeFirst()
             refreshProgress()
-            currentTask.runTask(this)
+            currentTask?.runTask(this)
         }
     }
 
