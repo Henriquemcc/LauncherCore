@@ -347,7 +347,7 @@ class ModpackModel protected constructor() {
 
     fun getBackground(): Resource? {
         if (packInfo == null) return null
-        return packInfo.getBackground()
+        return packInfo!!.background
     }
 
     fun getFeed(): ArrayList<FeedItem?>? {
