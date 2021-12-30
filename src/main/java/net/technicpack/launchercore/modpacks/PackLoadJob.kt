@@ -346,7 +346,7 @@ class PackLoadJob constructor(
                     }
                 }
             }
-        } else if (!modpack.getPackInfo()!!.isComplete()) {
+        } else if (!modpack.getPackInfo()!!.isComplete) {
             fillDataMethod = object : Runnable {
                 public override fun run() {
                     val completeInfo: PackInfo? = authoritativeSource.getCompletePackInfo(packInfo)
