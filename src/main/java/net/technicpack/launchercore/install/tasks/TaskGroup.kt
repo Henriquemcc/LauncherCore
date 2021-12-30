@@ -221,20 +221,42 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-class TaskGroup constructor(private val groupName: String) : IWeightedTasksQueue, IInstallTask {
+class TaskGroup(private val groupName: String) : IWeightedTasksQueue, IInstallTask {
+
     private val taskList: LinkedList<IInstallTask> = LinkedList()
     private val taskWeights: MutableMap<IInstallTask, Float> = HashMap()
-    private var totalWeight: Float = 0f
+    private var totalWeight: Float = 0.0F
     private var taskProgress: Int = 0
-    private var fileName: String? = ""
-    public override fun getTaskDescription(): String? {
-        return groupName.replace("%s", (fileName)!!)
+    private var fileName: String = ""
+
+    override fun addTask(task: IInstallTask, weight: Float) {
+        taskList.addLast(task)
+        taskWeights[task] = weight
+        totalWeight += weight
     }
 
-    public override fun getTaskProgress(): Float {
+    override fun addTask(task: IInstallTask) {
+        addTask(task, 1F)
+    }
+
+    override fun addNextTask(task: IInstallTask, weight: Float) {
+        taskList.addFirst(task)
+        taskWeights[task] = weight
+        totalWeight += weight
+    }
+
+    override fun addNextTask(task: IInstallTask) {
+        addNextTask(task, 1F)
+    }
+
+    override fun getTaskDescription(): String {
+        return groupName.replace("%s", (fileName))
+    }
+
+    override fun getTaskProgress(): Float {
         if (taskList.size == 0) return 0.0F
-        if (totalWeight == 0f) return 0.0F
-        var completedWeight: Float = 0f
+        if (totalWeight == 0F) return 0.0F
+        var completedWeight = 0F
         for (i in 0 until taskProgress) {
             val task: IInstallTask = taskList.get(i)
             if (taskWeights.containsKey(task)) {
@@ -243,42 +265,21 @@ class TaskGroup constructor(private val groupName: String) : IWeightedTasksQueue
         }
         val finishedTasksProgress: Float = (completedWeight / totalWeight)
         val currentTask: IInstallTask = taskList.get(taskProgress)
-        var currentTaskProgress: Float = (currentTask.getTaskProgress() / 100.0f)
-        var currentTaskWeight: Float = 1f
+        var currentTaskProgress: Float = (currentTask.getTaskProgress() / 100.0F)
+        var currentTaskWeight = 1F
         if (taskWeights.containsKey(currentTask)) currentTaskWeight = (taskWeights.get(currentTask))!!
         currentTaskProgress *= (currentTaskWeight / totalWeight)
-        return (finishedTasksProgress + currentTaskProgress) * 100.0f
+        return (finishedTasksProgress + currentTaskProgress) * 100.0F
     }
 
-    @Throws(IOException::class, InterruptedException::class)
-    public override fun runTask(queue: InstallTasksQueue<*>) {
+    override fun runTask(queue: InstallTasksQueue<*>?) {
         while (taskProgress < taskList.size) {
             if (Thread.interrupted()) throw InterruptedException()
-            val currentTask: IInstallTask = taskList.get(taskProgress)
-            fileName = currentTask.getTaskDescription()
+            val currentTask: IInstallTask = taskList[taskProgress]
+            fileName = currentTask.getTaskDescription().toString()
             currentTask.runTask(queue)
-            queue.refreshProgress()
+            queue?.refreshProgress()
             taskProgress++
         }
-    }
-
-    public override fun addNextTask(task: IInstallTask) {
-        addNextTask(task, 1f)
-    }
-
-    public override fun addTask(task: IInstallTask) {
-        addTask(task, 1f)
-    }
-
-    public override fun addNextTask(task: IInstallTask, weight: Float) {
-        taskList.addFirst(task)
-        taskWeights.put(task, weight)
-        totalWeight += weight
-    }
-
-    public override fun addTask(task: IInstallTask, weight: Float) {
-        taskList.addLast(task)
-        taskWeights.put(task, weight)
-        totalWeight += weight
     }
 }
