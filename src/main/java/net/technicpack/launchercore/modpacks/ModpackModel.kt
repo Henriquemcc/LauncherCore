@@ -282,7 +282,7 @@ class ModpackModel protected constructor() {
     }
 
     fun getDiscordId(): String? {
-        if (packInfo != null) return packInfo.getDiscordId() else return null
+        if (packInfo != null) return packInfo!!.discordId else return null
     }
 
     fun getName(): String? {
