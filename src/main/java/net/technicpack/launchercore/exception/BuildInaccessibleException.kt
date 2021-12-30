@@ -221,32 +221,21 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-class BuildInaccessibleException constructor(private val packDisplayName: String?, private val build: String) :
-    IOException() {
-    private override var cause: Throwable? = null
+class BuildInaccessibleException constructor(private val packDisplayName: String?, private val build: String, override val cause: Throwable? = null) : IOException() {
 
-    constructor(displayName: String?, build: String, cause: Throwable?) : this(displayName, build) {
-        this.cause = cause
-    }
+    override val message: String
+        get() {
+            var _message = "The pack host returned unrecognizable garbage while attempting to read pack info for modpack $packDisplayName, build $build."
+            if (this.cause != null) {
+                var rootCause = this.cause
 
-    public override fun getMessage(): String {
-        if (cause != null) {
-            var rootCause: Throwable? = cause
-            while (rootCause!!.cause != null) {
-                rootCause = rootCause.cause
+                while (rootCause?.cause != null) {
+                    rootCause = rootCause.cause
+                }
+
+                _message = "An error was raised while attempting to read pack info for modpack $packDisplayName, build $build: ${rootCause?.message}"
             }
-            return "An error was raised while attempting to read pack info for modpack " + packDisplayName + ", build " + build + ": " + rootCause.message
-        } else {
-            return "The pack host returned unrecognizable garbage while attempting to read pack info for modpack " + packDisplayName + ", build " + build + "."
+            return _message
         }
-    }
 
-    @Synchronized
-    public override fun getCause(): Throwable {
-        return (cause)!!
-    }
-
-    companion object {
-        private val serialVersionUID: Long = -4905270588640056830L
-    }
 }
