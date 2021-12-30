@@ -235,12 +235,10 @@ open class DownloadFileTask @JvmOverloads constructor(
         return taskDescription
     }
 
-    @Throws(IOException::class, InterruptedException::class)
-    public override fun runTask(queue: InstallTasksQueue<*>) {
+    override fun runTask(queue: InstallTasksQueue<*>?) {
         super.runTask(queue)
-        queue.getMirrorStore()
-            .downloadFile(url, destination!!.getName(), destination.getAbsolutePath(), null, fileVerifier, this)
-        if (!destination.exists()) {
+        queue?.getMirrorStore()?.downloadFile(url, destination!!.getName(), destination.getAbsolutePath(), null, fileVerifier, this)
+        if (destination?.exists() == false) {
             throw DownloadException("Failed to download " + destination.getName() + ".")
         }
     }
