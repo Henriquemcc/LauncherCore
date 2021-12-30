@@ -254,7 +254,7 @@ class Download constructor(private val url: URL, private val name: String?, priv
             stateChanged()
             val progress: Thread = MonitorThread(Thread.currentThread(), rbc)
             progress.start()
-            fos.getChannel().transferFrom(rbc, 0, if (size > 0) size else Int.MAX_VALUE)
+            fos.getChannel().transferFrom(rbc, 0, if (size > 0L) size else Int.MAX_VALUE.toLong())
             `in`.close()
             rbc.close()
             progress.interrupt()
