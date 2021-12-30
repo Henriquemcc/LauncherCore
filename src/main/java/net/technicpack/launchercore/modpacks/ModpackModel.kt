@@ -342,7 +342,7 @@ class ModpackModel protected constructor() {
 
     fun getLogo(): Resource? {
         if (packInfo == null) return null
-        return packInfo.getLogo()
+        return packInfo!!.logo
     }
 
     fun getBackground(): Resource? {
