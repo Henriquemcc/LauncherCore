@@ -575,7 +575,7 @@ class ModpackModel protected constructor() {
         if (this.priority < priority) {
             this.priority = priority
         }
-        if ((this.priority == -1) && (packInfo != null) && packInfo!!.isComplete()) {
+        if ((this.priority == -1) && (packInfo != null) && packInfo!!.isComplete) {
             if (packInfo!!.isOfficial()) this.priority = 5000 else this.priority = 1000
         }
     }
