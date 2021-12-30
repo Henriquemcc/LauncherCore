@@ -400,7 +400,7 @@ class ModpackModel protected constructor() {
 
     fun isServerPack(): Boolean {
         if (packInfo == null) return false
-        return packInfo!!.isServerPack()
+        return packInfo!!.isServerPack
     }
 
     fun getLikes(): Int? {
