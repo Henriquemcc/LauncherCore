@@ -295,7 +295,7 @@ class ModpackModel protected constructor() {
 
     fun getDisplayName(): String? {
         if (packInfo != null) {
-            return packInfo.getDisplayName()
+            return packInfo!!.displayName
         } else if (installedPack != null) {
             return installedPack!!.getName()
         } else return ""
