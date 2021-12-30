@@ -315,7 +315,7 @@ class ModpackModel protected constructor() {
     }
 
     fun getBuilds(): List<String?>? {
-        if (packInfo != null && packInfo!!.builds != null) return packInfo.getBuilds()
+        if (packInfo != null && packInfo!!.builds != null) return packInfo!!.builds
         val oneBuild: MutableList<String?> = ArrayList(1)
         val version: Version? = getInstalledVersion()
         if (version != null) oneBuild.add(version.getVersion()) else oneBuild.add(getBuild())
