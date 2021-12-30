@@ -332,7 +332,7 @@ class ModpackModel protected constructor() {
 
     fun getWebSite(): String? {
         if (getPackInfo() == null) return null
-        return getPackInfo().getWebSite()
+        return getPackInfo()?.webSite
     }
 
     fun getIcon(): Resource? {
