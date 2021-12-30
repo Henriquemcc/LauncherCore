@@ -395,7 +395,7 @@ class ModpackModel protected constructor() {
 
     fun getDescription(): String? {
         if (packInfo == null) return ""
-        return packInfo.getDescription()
+        return packInfo!!.description
     }
 
     fun isServerPack(): Boolean {
