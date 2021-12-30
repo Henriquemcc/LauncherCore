@@ -378,7 +378,7 @@ class ModpackModel protected constructor() {
         val allBuilds: List<String?>? = packInfo!!.builds
         if (!allBuilds!!.contains(installedBuild)) return true
         for (build: String? in allBuilds) {
-            if (build.equals(packInfo.getRecommended(), ignoreCase = true)) {
+            if (build.equals(packInfo!!.recommended, ignoreCase = true)) {
                 return false
             } else if (build.equals(installedBuild, ignoreCase = true)) {
                 return true
