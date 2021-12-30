@@ -210,7 +210,7 @@ class DeleteFileTask constructor(private val fileToDelete: File) : IInstallTask 
     }
 
     public override fun getTaskProgress(): Float {
-        return 0
+        return 0.0F
     }
 
     @Throws(IOException::class, InterruptedException::class)
