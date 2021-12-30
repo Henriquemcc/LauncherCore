@@ -221,27 +221,13 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-class AuthenticationNetworkFailureException constructor(private val targetSite: String) : IOException() {
-    private override var cause: Throwable? = null
-
-    constructor(targetSite: String, cause: Throwable?) : this(targetSite) {
-        this.cause = cause
-    }
-
-    public override fun getMessage(): String {
-        return "An error was raised while attempting to communicate with " + targetSite + "."
-    }
-
-    @Synchronized
-    public override fun getCause(): Throwable {
-        return (cause)!!
-    }
-
-    fun getTargetSite(): String {
-        return targetSite
-    }
+class AuthenticationNetworkFailureException constructor(private val targetSite: String, override val cause: Throwable? = null) : IOException() {
 
     companion object {
-        private val serialVersionUID: Long = 5887385045789342851L
+        const val serialVersionUID = 5887385045789342851L;
     }
+
+    override val message: String
+        get() = "An error was raised while attempting to communicate with $targetSite.";
+
 }
