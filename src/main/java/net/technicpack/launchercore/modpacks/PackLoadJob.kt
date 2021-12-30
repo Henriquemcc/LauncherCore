@@ -272,7 +272,7 @@ class PackLoadJob constructor(
         }
         if (packSources != null) {
             for (packSource: IPackSource in packSources) {
-                val packSourceThread: Thread = object : Thread(packSource.getSourceName() + " Loading Thread") {
+                val packSourceThread: Thread = object : Thread(packSource.sourceName + " Loading Thread") {
                     public override fun run() {
                         for (info: PackInfo? in packSource.getPublicPacks()) {
                             addPackThreadSafe(null, info, packSource.getPriority(info))
