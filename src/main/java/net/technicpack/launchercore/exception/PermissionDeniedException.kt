@@ -221,8 +221,7 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-class PermissionDeniedException @JvmOverloads constructor(message: String? = null, cause: Throwable? = null) :
-    DownloadException(message, cause) {
+class PermissionDeniedException @JvmOverloads constructor(message: String? = null, cause: Throwable? = null) : DownloadException(message, cause) {
     constructor(cause: Throwable?) : this(null, cause) {}
 
     companion object {

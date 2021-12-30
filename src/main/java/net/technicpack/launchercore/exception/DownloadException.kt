@@ -221,7 +221,7 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-class DownloadException(override val message: String? = null, override val cause: Throwable? = null) : IOException() {
+open class DownloadException(override val message: String? = null, override val cause: Throwable? = null) : IOException() {
 
     companion object {
         private const val serialVersionUID = 2L;
