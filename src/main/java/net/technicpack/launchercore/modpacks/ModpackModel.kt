@@ -337,7 +337,7 @@ class ModpackModel protected constructor() {
 
     fun getIcon(): Resource? {
         if (packInfo == null) return null
-        return packInfo.getIcon()
+        return packInfo!!.icon
     }
 
     fun getLogo(): Resource? {
