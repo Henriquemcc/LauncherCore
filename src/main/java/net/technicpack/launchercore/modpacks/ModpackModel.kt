@@ -287,7 +287,7 @@ class ModpackModel protected constructor() {
 
     fun getName(): String? {
         if (packInfo != null) {
-            return packInfo.getName()
+            return packInfo!!.name
         } else if (installedPack != null) {
             return installedPack!!.getName()
         } else return null
