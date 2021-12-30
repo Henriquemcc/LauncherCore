@@ -357,7 +357,7 @@ class ModpackModel protected constructor() {
 
     fun isLocalOnly(): Boolean {
         if (packInfo == null) return true
-        return packInfo!!.isLocal()
+        return packInfo!!.isLocal
     }
 
     fun getInstalledVersion(): Version? {
@@ -375,7 +375,7 @@ class ModpackModel protected constructor() {
         val installedVersion: Version? = getInstalledVersion()
         if (installedVersion == null) return false
         val installedBuild: String? = installedVersion.getVersion()
-        val allBuilds: List<String?>? = packInfo.getBuilds()
+        val allBuilds: List<String?>? = packInfo!!.builds
         if (!allBuilds!!.contains(installedBuild)) return true
         for (build: String? in allBuilds) {
             if (build.equals(packInfo.getRecommended(), ignoreCase = true)) {
