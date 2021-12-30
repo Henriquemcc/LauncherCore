@@ -247,7 +247,7 @@ class ModpackModel protected constructor() {
 
     fun isOfficial(): Boolean {
         if (packInfo == null) return false
-        return packInfo!!.isOfficial()
+        return packInfo!!.isOfficial
     }
 
     fun getInstalledPack(): InstalledPack? {
