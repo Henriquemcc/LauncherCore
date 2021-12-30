@@ -310,7 +310,7 @@ class PackLoadJob constructor(
 
     protected fun addPack(pack: InstalledPack?, packInfo: PackInfo?, priority: Int) {
         if (pack == null && packInfo == null || isCancelled) return
-        val name: String? = if ((pack != null)) pack.getName() else packInfo.getName()
+        val name: String? = if ((pack != null)) pack.getName() else packInfo?.name
         var modpack: ModpackModel? = null
         var newModpackModel: Boolean = true
         if (processedModpacks.containsKey(name)) {
