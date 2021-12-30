@@ -199,8 +199,7 @@ import net.technicpack.autoupdate.IBuildNumber
 import net.technicpack.utilslib.*
 import org.apache.commons.io.FileUtils
 
-class WriteRundataFile constructor(private val modpackModel: ModpackModel, private val modpack: Modpack) :
-    IInstallTask {
+class WriteRundataFile constructor(private val modpackModel: ModpackModel, private val modpack: Modpack) : IInstallTask {
     public override fun getTaskDescription(): String? {
         return "Writing Runtime Data"
     }
@@ -211,14 +210,13 @@ class WriteRundataFile constructor(private val modpackModel: ModpackModel, priva
 
     @Throws(IOException::class, InterruptedException::class)
     public override fun runTask(queue: InstallTasksQueue<*>?) {
-        if ((modpack.getJava() == null || modpack.getJava()
-                .isEmpty()) && (modpack.getMemory() == null || modpack.getMemory().isEmpty())
-        ) return
+        if ((modpack.java == null || modpack.java.isEmpty()) && (modpack.memory == null || modpack.memory.isEmpty()))
+            return
         val file: File? = modpackModel.getBinDir()
         val runDataFile: File = File(file, "runData")
         val runData: JsonObject = JsonObject()
-        val java: JsonElement = getJsonValue(modpack.getJava())
-        val memory: JsonElement = getJsonValue(modpack.getMemory())
+        val java: JsonElement = getJsonValue(modpack.java)
+        val memory: JsonElement = getJsonValue(modpack.memory)
         runData.add("java", java)
         runData.add("memory", memory)
         val output: String = Utils.getGson()!!.toJson(runData)
