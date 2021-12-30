@@ -221,29 +221,12 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-class PackNotAvailableOfflineException : IOException {
-    private var packDisplayName: String
-    private override var cause: Throwable? = null
-
-    constructor(displayName: String) {
-        packDisplayName = displayName
-    }
-
-    constructor(displayName: String, cause: Throwable?) {
-        packDisplayName = displayName
-        this.cause = cause
-    }
-
-    public override fun getMessage(): String {
-        return "The modpack " + packDisplayName + " does not appear to be installed or is corrupt, and is not available for Offline Play."
-    }
-
-    @Synchronized
-    public override fun getCause(): Throwable {
-        return (cause)!!
-    }
+class PackNotAvailableOfflineException(private val packDisplayName: String, override val cause: Throwable?) : IOException() {
 
     companion object {
-        private val serialVersionUID: Long = 3246491999503435492L
+        private const val serialVersionUID = 3246491999503435492L
     }
+
+    override val message: String
+        get() = "The modpack $packDisplayName does not appear to be installed or is corrupt, and is not available for Offline Play."
 }
