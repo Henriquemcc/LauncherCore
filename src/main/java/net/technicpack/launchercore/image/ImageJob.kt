@@ -237,7 +237,7 @@ class ImageJob<T> constructor(protected var mapper: IImageMapper<T>, protected v
         return imageReference.get()
     }
 
-    fun addJobListener(listener: IImageJobListener<*>) {
+    fun addJobListener(listener: IImageJobListener<T>) {
         synchronized(jobListeners, { jobListeners.add(listener) })
     }
 
@@ -266,7 +266,7 @@ class ImageJob<T> constructor(protected var mapper: IImageMapper<T>, protected v
     protected fun notifyComplete() {
         if (EventQueue.isDispatchThread()) {
             synchronized(jobListeners, {
-                for (listener: IImageJobListener<*> in jobListeners) {
+                for (listener: IImageJobListener<T> in jobListeners) {
                     listener.jobComplete(this)
                 }
             })
