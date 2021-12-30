@@ -221,28 +221,13 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-open class DownloadException @JvmOverloads constructor(message: String? = null, cause: Throwable? = null) :
-    IOException() {
-    private override val cause: Throwable
-    private override val message: String
-
-    init {
-        this.cause = (cause)!!
-        this.message = (message)!!
-    }
-
-    constructor(cause: Throwable?) : this(null, cause) {}
-
-    @Synchronized
-    public override fun getCause(): Throwable {
-        return cause
-    }
-
-    public override fun getMessage(): String {
-        return message
-    }
+class DownloadException(override val message: String? = null, override val cause: Throwable? = null) : IOException() {
 
     companion object {
-        private val serialVersionUID: Long = 2L
+        private const val serialVersionUID = 2L;
     }
+
+    constructor(cause: Throwable): this(null, cause)
+
+    constructor(message: String): this(message, null)
 }
