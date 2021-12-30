@@ -327,7 +327,7 @@ class ModpackModel protected constructor() {
     }
 
     fun getLatestBuild(): String? {
-        if (packInfo != null && packInfo!!.latest != null) return packInfo.getLatest() else return getBuild()
+        if (packInfo != null && packInfo!!.latest != null) return packInfo!!.latest else return getBuild()
     }
 
     fun getWebSite(): String? {
