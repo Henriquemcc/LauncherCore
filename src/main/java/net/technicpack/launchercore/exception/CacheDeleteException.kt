@@ -221,33 +221,13 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-class CacheDeleteException : IOException {
-    private override var cause: Throwable? = null
-    var filePath: String
-
-    constructor(filePath: String) {
-        this.filePath = filePath
-    }
-
-    constructor(filePath: String, cause: Throwable?) {
-        this.filePath = filePath
-        this.cause = cause
-    }
-
-    fun getFilePath(): String {
-        return filePath
-    }
-
-    @Synchronized
-    public override fun getCause(): Throwable {
-        return (cause)!!
-    }
-
-    public override fun getMessage(): String {
-        return "An error occurred while attempting to delete '" + filePath + "' from the cache:"
-    }
+class CacheDeleteException(val filePath: String, override val cause: Throwable? = null) : IOException() {
 
     companion object {
-        private val serialVersionUID: Long = 6462027370292375448L
+        private const val serialVersionUID = 6462027370292375448L;
     }
+
+    override val message: String
+        get() = "An error occurred while attempting to delete '$filePath' from the cache:"
+
 }
