@@ -221,8 +221,10 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-class ImageRepository<T> constructor(private val mapper: IImageMapper<T>, private val store: IImageStore<T>) {
-    private val allJobs: MutableMap<String?, ImageJob<*>> = HashMap()
+class ImageRepository<T> (private val mapper: IImageMapper<T>, private val store: IImageStore<T>) {
+
+    private val allJobs: MutableMap<String?, ImageJob<T>> = HashMap()
+
     fun startImageJob(key: T): ImageJob<*>? {
         val jobKey: String? = store.getJobKey(key)
         var job: ImageJob<T>? = null
