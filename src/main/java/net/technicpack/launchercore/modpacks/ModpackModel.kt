@@ -405,7 +405,7 @@ class ModpackModel protected constructor() {
 
     fun getLikes(): Int? {
         if (packInfo == null) return null
-        return packInfo.getLikes()
+        return packInfo!!.likes
     }
 
     fun getRuns(): Int? {
