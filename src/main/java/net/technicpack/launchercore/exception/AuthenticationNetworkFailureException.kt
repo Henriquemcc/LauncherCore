@@ -221,7 +221,7 @@ import net.technicpack.launchercore.modpacks.PackLoadJob
 import java.util.concurrent.ConcurrentHashMap
 import net.technicpack.autoupdate.IBuildNumber
 
-class AuthenticationNetworkFailureException constructor(private val targetSite: String, override val cause: Throwable? = null) : IOException() {
+class AuthenticationNetworkFailureException constructor(val targetSite: String, override val cause: Throwable? = null) : IOException() {
 
     companion object {
         const val serialVersionUID = 5887385045789342851L;

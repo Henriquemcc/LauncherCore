@@ -294,7 +294,7 @@ class UserModel<UserType : IUserType?> constructor(
             ex.printStackTrace()
             return AuthError(
                 "Auth Servers Inaccessible",
-                "An error occurred while attempting to reach " + ex.getTargetSite()
+                "An error occurred while attempting to reach " + ex.cause
             )
         }
     }
