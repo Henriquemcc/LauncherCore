@@ -352,7 +352,7 @@ class ModpackModel protected constructor() {
 
     fun getFeed(): ArrayList<FeedItem?>? {
         if (packInfo == null) return ArrayList()
-        return packInfo.getFeed()
+        return packInfo!!.feed
     }
 
     fun isLocalOnly(): Boolean {
