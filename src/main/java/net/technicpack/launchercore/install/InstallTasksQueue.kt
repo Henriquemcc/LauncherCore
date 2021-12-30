@@ -265,7 +265,7 @@ class InstallTasksQueue<Metadata>(private val listener: DownloadListener?, priva
         this.metadata = metadata
     }
 
-    fun getMetadata(): Metadata {
+    fun getMetadata(): Metadata? {
         return metadata
     }
 }
