@@ -415,7 +415,7 @@ class ModpackModel protected constructor() {
 
     fun getDownloads(): Int? {
         if (packInfo == null) return null
-        return packInfo.getDownloads()
+        return packInfo!!.downloads
     }
 
     fun getRunData(): RunData? {
