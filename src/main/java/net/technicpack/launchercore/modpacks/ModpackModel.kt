@@ -323,7 +323,7 @@ class ModpackModel protected constructor() {
     }
 
     fun getRecommendedBuild(): String? {
-        if (packInfo != null && packInfo!!.recommended != null) return packInfo.getRecommended() else return getBuild()
+        if (packInfo != null && packInfo!!.recommended != null) return packInfo!!.recommended else return getBuild()
     }
 
     fun getLatestBuild(): String? {
