@@ -232,7 +232,7 @@ class TaskGroup constructor(private val groupName: String) : IWeightedTasksQueue
     }
 
     public override fun getTaskProgress(): Float {
-        if (taskList.size == 0) return 0
+        if (taskList.size == 0) return 0.0F
         if (totalWeight == 0f) return 0
         var completedWeight: Float = 0f
         for (i in 0 until taskProgress) {
