@@ -231,7 +231,7 @@ class PackResourceMapper constructor(
         val res: Resource? = resourceType.getResource(imageKey)
         if (res == null) return false
         if (res.md5 == null || res.md5!!.isEmpty()) return true
-        return !MD5Utils.checkMD5(getImageLocation(imageKey), res.getMd5())
+        return !MD5Utils.checkMD5(getImageLocation(imageKey), res.md5)
     }
 
     public override fun getImageLocation(imageKey: ModpackModel): File {
