@@ -230,7 +230,7 @@ class PackResourceMapper constructor(
     public override fun shouldDownloadImage(imageKey: ModpackModel): Boolean {
         val res: Resource? = resourceType.getResource(imageKey)
         if (res == null) return false
-        if (res.md5 == null || res.getMd5().isEmpty()) return true
+        if (res.md5 == null || res.md5!!.isEmpty()) return true
         return !MD5Utils.checkMD5(getImageLocation(imageKey), res.getMd5())
     }
 
