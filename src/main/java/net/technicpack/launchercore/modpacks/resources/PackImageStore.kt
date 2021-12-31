@@ -252,6 +252,6 @@ class PackImageStore constructor(
     }
 
     public override fun canRetry(key: ModpackModel): Boolean {
-        return (key.getPackInfo() == null || !key.getPackInfo()!!.isComplete())
+        return (key.getPackInfo() == null || !key.getPackInfo()!!.isComplete)
     }
 }
