@@ -243,7 +243,7 @@ class PackImageStore constructor(
             return
         } catch (e: IOException) {
             Utils.getLogger()
-                .log(Level.INFO, "Error downloading pack resource " + res.getUrl() + " for pack " + key.getName(), e)
+                .log(Level.INFO, "Error downloading pack resource " + res.url + " for pack " + key.getName(), e)
         }
     }
 
