@@ -225,7 +225,7 @@ class PackImageStore constructor(
 ) : IImageStore<ModpackModel> {
     public override fun canDownloadImage(key: ModpackModel, target: File?): Boolean {
         val res: Resource? = resourceType.getResource(key)
-        if ((res == null) || (res.getUrl() == null) || res.getUrl().isEmpty()) return false
+        if ((res == null) || (res.url == null) || res.getUrl().isEmpty()) return false
         return true
     }
 
