@@ -234,7 +234,7 @@ class PackImageStore constructor(
         if ((res == null) || (res.url == null) || res.url!!.isEmpty()) return
         try {
             mirrorStore.downloadFile(
-                res.getUrl(),
+                res.url,
                 userModel.getCurrentUser()!!.getDisplayName(),
                 target.getAbsolutePath()
             )
