@@ -231,7 +231,7 @@ class PackImageStore constructor(
 
     public override fun downloadImage(key: ModpackModel, target: File) {
         val res: Resource? = resourceType.getResource(key)
-        if ((res == null) || (res.getUrl() == null) || res.getUrl().isEmpty()) return
+        if ((res == null) || (res.url == null) || res.getUrl().isEmpty()) return
         try {
             mirrorStore.downloadFile(
                 res.getUrl(),
